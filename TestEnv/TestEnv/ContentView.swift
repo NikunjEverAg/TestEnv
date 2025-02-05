@@ -9,7 +9,7 @@ import SwiftUI
 import SwiftData
 
 struct ContentView: View {
-    @State private var environment: String = ""
+    @State private var environment: String = "ENV"
 
     var body: some View {
         VStack {

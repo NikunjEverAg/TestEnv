@@ -21,8 +21,6 @@
 		EC90D1862D538CDB007E1ED4 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		EC90D1882D538CDD007E1ED4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EC90D18B2D538CDD007E1ED4 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		EC90D1932D538D15007E1ED4 /* Production.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Production.xcconfig; sourceTree = "<group>"; };
-		EC90D1942D538D1D007E1ED4 /* Staging.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Staging.xcconfig; sourceTree = "<group>"; };
 		EC90D1952D538D92007E1ED4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -78,8 +76,6 @@
 		EC90D1922D538D0A007E1ED4 /* Environment */ = {
 			isa = PBXGroup;
 			children = (
-				EC90D1932D538D15007E1ED4 /* Production.xcconfig */,
-				EC90D1942D538D1D007E1ED4 /* Staging.xcconfig */,
 			);
 			path = Environment;
 			sourceTree = "<group>";
@@ -165,7 +161,6 @@
 /* Begin XCBuildConfiguration section */
 		EC90D18D2D538CDD007E1ED4 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = EC90D1932D538D15007E1ED4 /* Production.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -229,7 +224,6 @@
 		};
 		EC90D18E2D538CDD007E1ED4 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = EC90D1932D538D15007E1ED4 /* Production.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -346,7 +340,6 @@
 		};
 		EC90D1962D538DB8007E1ED4 /* Debug Staging */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = EC90D1942D538D1D007E1ED4 /* Staging.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -440,7 +433,6 @@
 		};
 		EC90D1982D538DBE007E1ED4 /* Release Staging */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = EC90D1942D538D1D007E1ED4 /* Staging.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
