@@ -1,0 +1,18 @@
+name: Inject Config
+description: "Inject variables into XCConfig"
+
+inputs:
+  api-key:
+    required: true
+
+runs:
+  using: "composite"
+  steps:
+    - name: Inject variables into environment file
+      working-directory: ./TestEnv/Environment
+      env:
+        API_KEY: ${{ inputs.api-key }}
+      run: |
+          cp ./Template.xcconfig ./Environment/Production.xcconfig
+          sed -i '' "s|%%API_KEY%%|$API_KEY|" ./Environment/Production.xcconfig
+      shell: bash

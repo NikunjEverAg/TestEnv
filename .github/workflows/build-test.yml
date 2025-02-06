@@ -1,0 +1,41 @@
+name: build-test
+
+on:
+  pull_request:
+    branches: [staging]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: Build and Test Application
+    runs-on: macos-14
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up ruby environment
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.0.0
+          bundler-cache: false
+
+      - name: Install gems
+        run: bundle install
+
+      - name: Inject environment variables
+        uses: ./.github/actions/inject-config
+        with:
+          barchart-api-key: ${{ secrets.BARCHART_API_KEY }}
+          mixpanel-key: ${{ secrets.MIXPANEL_KEY }}
+          sentry-key: ${{ secrets.SENTRY_KEY }}
+          vault-api-url: ${{ secrets.VAULT_API_URL }}
+          auth0-domain: ${{ secrets.AUTH0_DOMAIN }}
+          auth0-client-id: ${{ secrets.AUTH0_CLIENT_ID }}
+          posthog-api-key: ${{ secrets.POSTHOG_API_KEY }}
+          posthog-host: ${{ secrets.POSTHOG_HOST }}
+
+      - name: Run tests
+        run: bundle exec fastlane test
