@@ -9,7 +9,7 @@ runs:
   using: "composite"
   steps:
     - name: Inject variables into environment file
-      working-directory: /Environment
+      working-directory: .TestEnv/TestEnv/Environment
       env:
         API_KEY: ${{ inputs.api-key }}
       run: |
