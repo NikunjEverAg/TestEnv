@@ -24,6 +24,7 @@
 		EC90D1952D538D92007E1ED4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		EC90D19A2D5393F4007E1ED4 /* Production.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Production.xcconfig; sourceTree = "<group>"; };
 		EC90D19B2D5393FE007E1ED4 /* Staging.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Staging.xcconfig; sourceTree = "<group>"; };
+		EC90D19C2D54F0C7007E1ED4 /* Template.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Template.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +64,7 @@
 				EC90D1862D538CDB007E1ED4 /* Item.swift */,
 				EC90D1882D538CDD007E1ED4 /* Assets.xcassets */,
 				EC90D18A2D538CDD007E1ED4 /* Preview Content */,
+				EC90D19C2D54F0C7007E1ED4 /* Template.xcconfig */,
 			);
 			path = TestEnv;
 			sourceTree = "<group>";
