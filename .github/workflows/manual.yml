@@ -18,19 +18,12 @@ jobs:
   uploadToTestFlight:
     name: TestFlight Deployment
     environment: ${{ inputs.choice }}
-    runs-on: macos-14-large
-    strategy:
-      matrix:
-        xcode:
-          - /Applications/Xcode_15.4.app
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
         with:
           ref: ${{ github.event.inputs.branch }}
-      - name: Select Xcode version
-        run: |
-          sudo xcode-select --switch ${{ matrix.xcode }}
 
       - name: Pre Build steps
         uses: ./.github/actions/inject-config
