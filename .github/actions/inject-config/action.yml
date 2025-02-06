@@ -8,12 +8,25 @@ inputs:
 runs:
   using: "composite"
   steps:
+    - name: Ensure Environment directory exists
+      run: |
+        echo "Creating directory TestEnv/TestEnv/Environment"
+        mkdir -p TestEnv/TestEnv/Environment
+      shell: bash
+
     - name: Inject variables into environment file
       env:
         API_KEY: ${{ inputs.api-key }}
       run: |
-        cp TestEnv/TestEnv/Template.xcconfig TestEnv/TestEnv/Environment/Production.xcconfig
-        sed -i "s|%%API_KEY%%|$API_KEY|g" TestEnv/TestEnv/Environment/Production.xcconfig
+        # Ensure Template.xcconfig exists in the source folder
+        if [ -f "TestEnv/TestEnv/Template.xcconfig" ]; then
+          echo "Template.xcconfig found!"
+          cp TestEnv/TestEnv/Template.xcconfig TestEnv/TestEnv/Environment/Production.xcconfig
+          sed -i "s|%%API_KEY%%|$API_KEY|g" TestEnv/TestEnv/Environment/Production.xcconfig
+        else
+          echo "Template.xcconfig not found. Please check the path."
+          exit 1
+        fi
       shell: bash
 
     - name: Verify file contents
