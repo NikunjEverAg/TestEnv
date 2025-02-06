@@ -92,7 +92,7 @@ iOSInjectionProject/
 
 # GraphQL
 *schema.json
-*.xcconfig
+.xcconfig
 
 # ENV
 .DS_Store
