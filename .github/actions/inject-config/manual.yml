@@ -1,0 +1,72 @@
+name: Manual Deployment Workflow
+
+on:
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: 'Branch to deploy'
+        required: true  
+      choice:
+        type: choice
+        description: 'Environment to deploy to (staging, production)'
+        required: true
+        options:
+          - 'staging'
+          - 'production'
+
+jobs:
+  uploadToTestFlight:
+    name: TestFlight Deployment
+    environment: staging
+    runs-on: macos-14-large
+    strategy:
+      matrix:
+        xcode:
+          - /Applications/Xcode_15.4.app
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          ref: ${{ github.event.inputs.branch }}
+      - name: Select Xcode version
+        run: |
+          sudo xcode-select --switch ${{ matrix.xcode }}
+
+      - name: Pre Build steps
+        uses: ./.github/actions/inject-config
+        with:
+            api-key: ${{ secrets.API_KEY }}
+          
+      - name: Install certificate and provisioning profiles
+        uses: ./.github/actions/setup-certificate
+        with:
+          APP_STORE_CONNECT_API_KEY_ISSUER_ID: ${{ secrets.APP_STORE_CONNECT_API_KEY_ISSUER_ID }}
+          APP_STORE_CONNECT_API_KEY_KEY: ${{ secrets.APP_STORE_CONNECT_API_KEY_KEY }}
+          APP_STORE_CONNECT_API_KEY_KEY_ID: ${{ secrets.APP_STORE_CONNECT_API_KEY_KEY_ID }}
+          APP_STORE_CONNECT_KEY_B64: ${{ secrets.APP_STORE_CONNECT_KEY_B64 }}
+          FASTLANE_PASSWORD: ${{ secrets.FASTLANE_PASSWORD }}
+          MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
+          GIT_AUTHORIZATION: ${{ secrets.GIT_AUTHORIZATION }}
+
+      - name: Fastlane setup
+        uses: ./.github/actions/setup-fastlane
+      
+      - name: Upload to TestFlight
+        shell: bash
+        run: |
+          bundle install
+          source .fastlane
+          case "${{ github.event.inputs.choice }}" in
+          staging)
+            echo "Deploying to staging environment"
+            bundle exec fastlane --verbose staging_lane
+          ;;
+          production)
+            echo "Deploying to training environment"
+            bundle exec fastlane --verbose production_lane
+          ;;
+          *)
+            echo "Invalid environment specified"
+          exit 1
+          ;;
+          esac
