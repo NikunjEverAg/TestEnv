@@ -8,17 +8,20 @@ inputs:
 runs:
   using: "composite"
   steps:
+    - name: Debug - List all files
+      run: ls -R
+      shell: bash
+
     - name: Ensure Environment directory exists
       run: mkdir -p TestEnv/TestEnv/Environment
       shell: bash
 
     - name: Inject variables into environment file
-      working-directory: TestEnv/TestEnv
       env:
         API_KEY: ${{ inputs.api-key }}
       run: |
-        cp Template.xcconfig Environment/Production.xcconfig
-        sed -i '' "s|%%API_KEY%%|$API_KEY|" Environment/Production.xcconfig
+        cp TestEnv/TestEnv/Template.xcconfig TestEnv/TestEnv/Environment/Production.xcconfig
+        sed -i '' "s|%%API_KEY%%|$API_KEY|" TestEnv/TestEnv/Environment/Production.xcconfig
       shell: bash
 
     - name: Verify file existence
